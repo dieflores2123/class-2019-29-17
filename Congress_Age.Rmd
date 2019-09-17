@@ -9,6 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 library(fivethirtyeight)
+library(ggthemes)
 ```
 ```{r}
 congress_age %>%
@@ -16,7 +17,7 @@ mutate(year = format(termstart, "%Y")) %>%
 filter(party %in% c("R", "D")) %>%
 group_by(year, party) %>%
 summarize(avg = mean(age)) %>%
-ggplot(aes(x=year, y=avg, group = party, color = party))+ geom_line() + labs(title = "something")
+ggplot(aes(x=year, y=avg, group = party, color = party))+ geom_line() + labs(title = "something", subtitle = "At start of term, 1947-2013", source = "538 R Package") + theme_fivethirtyeight() + scale_color_fivethirtyeight()
 ```
 
 
